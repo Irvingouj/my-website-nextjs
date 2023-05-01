@@ -1,14 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
-
-import "./chatbox.css";
-
-import { getResponse, Message } from "../utils/ChatService";
+import { Message, getResponse } from '../utils/ChatService';
+import './chatbox.css';
+import React, { FC, useEffect, useState } from 'react';
 
 const Chatbox: FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
-      content: "Hello,is there anything you wanna know about me?",
-      sender: "me",
+      content: 'Hello,is there anything you wanna know about me?',
+      sender: 'me',
     },
   ]);
   const [inputFinished, setInputFinished] = useState<boolean>(false);
@@ -20,13 +18,13 @@ const Chatbox: FC = () => {
     if (!inputRef.current) {
       return;
     }
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       const newMessage = {
         content: inputRef.current.value,
-        sender: "you",
+        sender: 'you',
       };
       setMessages([...messages, newMessage]);
-      inputRef.current.value = "";
+      inputRef.current.value = '';
       setInputFinished(true);
     }
   };
@@ -39,7 +37,7 @@ const Chatbox: FC = () => {
 
     async function getResponseFromServer() {
       const res = await getResponse(messages);
-      setMessages([...messages, { content: res, sender: "Me" }]);
+      setMessages([...messages, { content: res, sender: 'Me' }]);
       setInputFinished(false);
     }
 
@@ -48,7 +46,7 @@ const Chatbox: FC = () => {
     } catch (e) {
       setMessages([
         ...messages,
-        { content: "Sorry,OpenAI refuse to answer", sender: "Me" },
+        { content: 'Sorry,OpenAI refuse to answer', sender: 'Me' },
       ]);
     }
   }, [inputFinished]);
@@ -103,7 +101,7 @@ const Chatbox: FC = () => {
                     }
                   }}
                   className={
-                    "chat-list-item " + (index % 2 == 0 ? "even" : "odd")
+                    'chat-list-item ' + (index % 2 == 0 ? 'even' : 'odd')
                   }
                   key={index}
                   style={{ minHeight: minHeight(getMap().get(index)) }}
@@ -111,7 +109,7 @@ const Chatbox: FC = () => {
                   <div className="sender">
                     {message.sender.charAt(0).toUpperCase() +
                       message.sender.slice(1) +
-                      ":"}
+                      ':'}
                   </div>
 
                   <span className="text">{message.content}</span>
