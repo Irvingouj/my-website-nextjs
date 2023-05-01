@@ -3,10 +3,10 @@ import { FC } from 'react';
 
 const LinksWrapper: FC = () => {
   return (
-    <div id="Links">
-      <div className="w ww zuopin">
-        <ul>
-          <li className="block">
+    <div id="links-wrapper" className="mt-[5rem] mb-[5rem] px-[5rem]">
+      <div className="w">
+        <ul className="flex justify-center ">
+          <li className="flex-1 mx-[5rem] bg-main-background">
             <div className="img">
               <a
                 href="Software_Engineer_Resume__8.pdf"
@@ -38,7 +38,7 @@ const LinksWrapper: FC = () => {
               </a>
             </div>
           </li>
-          <li className="block">
+          <li className="flex-1 mx-[5rem] bg-main-background">
             <div className="img">
               <a href="https://github.com/Irvingouj/my-website">
                 <Image

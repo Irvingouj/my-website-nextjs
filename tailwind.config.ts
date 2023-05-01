@@ -50,6 +50,10 @@ export default {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
       },
+      backgroundImage: {
+        'main-background': 'url("/images/background1.jpg")',
+        'second-background': 'url("/images/background2.jpg")',
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

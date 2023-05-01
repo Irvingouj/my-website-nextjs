@@ -2,7 +2,7 @@ import Game from '@/components/Game/Game';
 import { FC } from 'react';
 
 const GameWrapper: FC = () => (
-  <div className="" id="Game">
+  <div className="flex-1 mt-[5rem]" id="Game">
     <Game />
   </div>
 );

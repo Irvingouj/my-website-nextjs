@@ -17,21 +17,18 @@ export const smoothScroll = (
 
 const TopBar: FC = () => {
   return (
-    <div>
+    <div id="TopNavBar" className="flex flex-row w-11/12 justify-evenly">
       <div>
-        <Image src="/irving-ou.svg" alt="logo" width={50} height={50} />
+        <Image src="/irving-ou.svg" alt="logo" width={228} height={53.05} />
       </div>
-      <div>
-        <Image src="/01.png" alt="phone" width={50} height={50} />
-        {GetText.phone()}
-      </div>
+
       <div>
         <a href="#" onClick={(e) => e.preventDefault()}>
           <span></span>
         </a>
         <nav>
           <div>
-            <ul>
+            <ul className="flex ">
               <li>
                 <a href="#">About</a>
               </li>
@@ -58,6 +55,10 @@ const TopBar: FC = () => {
             </ul>
           </div>
         </nav>
+      </div>
+      <div className="flex">
+        <Image src="/01.png" alt="phone" width={28} height={14} />
+        {GetText.phone()}
       </div>
       <div></div>
     </div>

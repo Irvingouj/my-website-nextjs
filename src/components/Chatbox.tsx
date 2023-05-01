@@ -84,8 +84,11 @@ const Chatbox: FC = () => {
   };
 
   return (
-    <div className="zuopin2" id="Chat">
-      <div className="w ww">
+    <div
+      className="mt-[5rem] justify-center bg-second-background w-full h-full flex items-center"
+      id="Chat"
+    >
+      <div className="w-[70%] mt-[5rem] mb-[5rem]">
         <div className="chatarea">
           <div className="chatbox" ref={chatboxRef}>
             {messages.map((message, index) => {

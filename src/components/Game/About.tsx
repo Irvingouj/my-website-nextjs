@@ -4,10 +4,13 @@ import Image from 'next/image';
 import { FC } from 'react';
 
 const About: FC = () => (
-  <div id="About">
+  <div
+    id="About"
+    className="w-full mt-[2rem] pt-[0.18rem] pb-[0.46rem] bg-main-background flex flex-col"
+  >
     <TopBar />
-    <div className="w ban_con">
-      <div className="pc_fl txt">
+    <div className=" w-[95%] max-w-[1200px] mx-auto flex flex-auto">
+      <div className="float-right overflow-hidden flex-1 font">
         <h1 style={{ fontStyle: 'italic' }}>
           Hi There, My name is {GetText.name()}
         </h1>
@@ -27,8 +30,14 @@ const About: FC = () => (
         <br />
         <p>Play a game with me!</p>
       </div>
-      <div className="pc_fr img">
-        <Image src="/selfie.png" alt="Selfie" width={300} height={300} />
+      <div className="flex-1 float-right">
+        <Image
+          src="/selfie.png"
+          alt="Selfie"
+          width={300}
+          height={300}
+          className="float-right"
+        />
       </div>
       <div className="clear"></div>
     </div>
