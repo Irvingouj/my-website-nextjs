@@ -1,4 +1,3 @@
-import './gameWrapper.css';
 import Game from '@/components/Game/Game';
 import { FC } from 'react';
 

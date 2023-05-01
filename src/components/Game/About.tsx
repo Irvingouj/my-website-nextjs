@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 
 const About: FC = () => (
-  <div className="banner">
+  <div id="About">
     <TopBar />
     <div className="w ban_con">
       <div className="pc_fl txt">

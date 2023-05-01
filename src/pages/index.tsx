@@ -11,7 +11,6 @@ export default function HomePage() {
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
       <Seo />
-
       <main>
         <div className="App" style={{ scrollBehavior: 'smooth' }}>
           <About />

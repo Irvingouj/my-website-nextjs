@@ -1,4 +1,3 @@
-import './LinksWrapper.css';
 import Image from 'next/image';
 import { FC } from 'react';
 

@@ -1,5 +1,4 @@
 import { Message, getResponse } from '../utils/ChatService';
-import './chatbox.css';
 import React, { FC, useEffect, useState } from 'react';
 
 const Chatbox: FC = () => {
