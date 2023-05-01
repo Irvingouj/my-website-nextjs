@@ -1,4 +1,4 @@
-export type Player = "X" | "O";
+export type Player = 'X' | 'O';
 export type SquareValue = Player | null;
 const winningLines = [
   [0, 1, 2],
@@ -20,7 +20,7 @@ export interface GameBoard {
     SquareValue,
     SquareValue,
     SquareValue,
-    SquareValue
+    SquareValue,
   ];
 }
 
@@ -31,7 +31,7 @@ export const DefaultGameBoard = (): GameBoard => {
 // check if a player has won
 export const PlayerWins = (
   board: Array<SquareValue>,
-  player: Player
+  player: Player,
 ): boolean => {
   for (let i = 0; i < winningLines.length; i++) {
     const [a, b, c] = winningLines[i];
@@ -45,31 +45,31 @@ export const PlayerWins = (
 
 export const GameOver = (board: Array<SquareValue>): boolean => {
   return (
-    PlayerWins(board, "X") ||
-    PlayerWins(board, "O") ||
+    PlayerWins(board, 'X') ||
+    PlayerWins(board, 'O') ||
     board.every((square) => square !== null)
   );
 };
 
 export const OWins = (board: Array<SquareValue>): boolean => {
-  return PlayerWins(board, "O");
+  return PlayerWins(board, 'O');
 };
 
 export const XWins = (board: Array<SquareValue>): boolean => {
-  return PlayerWins(board, "X");
+  return PlayerWins(board, 'X');
 };
 
-const whoWins = (board: Array<SquareValue>): Player | "draw" | null => {
-  if (PlayerWins(board, "X")) return "X";
-  else if (PlayerWins(board, "O")) return "O";
-  else if (board.every((square) => square !== null)) return "draw";
+const whoWins = (board: Array<SquareValue>): Player | 'draw' | null => {
+  if (PlayerWins(board, 'X')) return 'X';
+  else if (PlayerWins(board, 'O')) return 'O';
+  else if (board.every((square) => square !== null)) return 'draw';
   else return null;
 };
 
 export function DrawBoard(ctx: CanvasRenderingContext2D) {
   const width = ctx.canvas.width - 200;
   const height = ctx.canvas.height;
-  ctx.strokeStyle = "black";
+  ctx.strokeStyle = 'black';
   ctx.lineWidth = 5;
 
   ctx.beginPath();
@@ -104,10 +104,10 @@ export const OffBoard = (x: number, y: number): boolean => {
 /* eslint-disable */
 export const ComputerPlay = (
   board: GameBoard,
-  computerPiece: SquareValue
+  computerPiece: SquareValue,
 ): number => {
   const computer = computerPiece;
-  const human = computer === "X" ? "O" : "X";
+  const human = computer === 'X' ? 'O' : 'X';
   const emptySquares = board.squares
     .map((square, index) => (square === null ? index : null))
     .filter((index) => index !== null);
@@ -146,7 +146,7 @@ export const ComputerPlay = (
 /* eslint-enable */
 export type Result = {
   finished: boolean;
-  winner: Player | "draw" | null;
+  winner: Player | 'draw' | null;
   finishPosition?: [number, number];
 };
 

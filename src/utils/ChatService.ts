@@ -21,19 +21,19 @@ export const getResponse = async (messages: Message[]): Promise<string> => {
     return `${acc}\n${message.sender}: ${message.content}`;
   }, knowledgeBase);
 
-  prompt += "\nme:";
+  prompt += '\nme:';
 
   const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append('Content-Type', 'application/json');
 
   const config = {
-    model: "text-davinci-003",
+    model: 'text-davinci-003',
     max_tokens: 100,
     temperature: 1,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    stop: ["\n"],
+    stop: ['\n'],
   };
 
   const raw = JSON.stringify({
@@ -42,14 +42,14 @@ export const getResponse = async (messages: Message[]): Promise<string> => {
   });
 
   const requestOptions = {
-    method: "POST",
+    method: 'POST',
     headers: myHeaders,
     body: raw,
   };
 
   const res = await fetch(
-    "https://irvingouj.azurewebsites.net/api/service/chat?code=W3doon5dJNOfnMiJdsV3eLPtCkUDZmV7dbeFoxzP6vJNAzFuh6KVPg==",
-    requestOptions
+    'https://irvingouj.azurewebsites.net/api/service/chat?code=W3doon5dJNOfnMiJdsV3eLPtCkUDZmV7dbeFoxzP6vJNAzFuh6KVPg==',
+    requestOptions,
   );
   const data = await res.json();
 

@@ -1,17 +1,16 @@
-import Image from "next/image";
-import React, { FC } from "react";
-
-import { GetText } from "../../utils/TextSource";
+import { GetText } from '../../utils/TextSource';
+import Image from 'next/image';
+import React, { FC } from 'react';
 
 export const smoothScroll = (
-  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
 ) => {
   e.preventDefault();
-  const target = e.currentTarget.getAttribute("href");
+  const target = e.currentTarget.getAttribute('href');
   if (target) {
     const targetElement = document.querySelector(target);
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+      targetElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
 };

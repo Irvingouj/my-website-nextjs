@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 type Func<T> = (value: T | undefined) => void;
 
@@ -15,7 +15,7 @@ type Effect = () => void | (() => void);
 export const useEffectIf = <T>(
   condition: boolean,
   effect: Effect,
-  arr: [T]
+  arr: [T],
 ) => {
   useEffect(() => {
     if (condition) {

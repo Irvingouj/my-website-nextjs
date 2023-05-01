@@ -11,7 +11,7 @@ export class Canvas {
   DrawBoard() {
     const width = this.ctx.canvas.width - 200;
     const height = this.ctx.canvas.height;
-    this.ctx.strokeStyle = "black";
+    this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 5;
 
     this.ctx.beginPath();
@@ -36,11 +36,11 @@ export class Canvas {
     this.ctx.stroke();
   }
 
-  Draw(piece: "X" | "O") {
+  Draw(piece: 'X' | 'O') {
     return {
       at: (block: number) => {
         const center = blockToCenterPosition(block);
-        if (piece === "X") {
+        if (piece === 'X') {
           this.ctx.beginPath();
           this.ctx.moveTo(center.x - 25, center.y - 25);
           this.ctx.lineTo(center.x + 25, center.y + 25);
@@ -60,7 +60,7 @@ export class Canvas {
 
   PlayerDraw(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
     if (this.position === undefined) {
-      throw new Error("Position is undefined");
+      throw new Error('Position is undefined');
     }
     const posi = getOffSetPosition(e, this.ctx.canvas.getBoundingClientRect());
     this.ctx.beginPath();
@@ -73,11 +73,11 @@ export class Canvas {
 
 function getOffSetPosition(
   e: React.MouseEvent<HTMLCanvasElement, MouseEvent>,
-  rec: DOMRect
+  rec: DOMRect,
 ): Position {
   const rect = rec;
   if (rect === null) {
-    throw new Error("Rect is null");
+    throw new Error('Rect is null');
   }
   const x = e.clientX - rect.x;
   const y = e.clientY - rect.y;

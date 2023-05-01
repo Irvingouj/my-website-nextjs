@@ -4,7 +4,7 @@ export const enumerate = <T>(arr: Array<T>): Array<[number, T]> => {
 
 export const findFirstDifference = <T>(
   arr1: Array<T>,
-  arr2: Array<T>
+  arr2: Array<T>,
 ): [number, T | null] => {
   for (const [index, item] of enumerate(arr1)) {
     if (item !== arr2[index]) {
