@@ -55,10 +55,13 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "eslint --max-warnings=0"
+      "eslint --max-warnings=0",
+      "prettier -w",
+      "git add"
     ],
     "**/*.{json,css,scss,md,webmanifest}": [
-      "prettier -w"
+      "prettier -w",
+      "git add"
     ]
   }
 }
