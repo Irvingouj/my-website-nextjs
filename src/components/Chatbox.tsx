@@ -1,6 +1,8 @@
-import { getResponse, Message } from "../utils/ChatService";
-import "./chatbox.css";
 import React, { FC, useEffect, useState } from "react";
+
+import "./chatbox.css";
+
+import { getResponse, Message } from "../utils/ChatService";
 
 const Chatbox: FC = () => {
   const [messages, setMessages] = useState<Message[]>([
