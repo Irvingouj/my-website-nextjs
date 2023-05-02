@@ -50,32 +50,6 @@ const Chatbox: FC = () => {
     }
   }, [inputFinished]);
 
-  const minHeight = (div: HTMLDivElement | undefined) => {
-    if (!div) {
-      return 60;
-    }
-    const wordHeight = 232 / 8;
-    const wordWidth = 1110 / 79;
-
-    const height = div.offsetHeight;
-    const width = div.offsetWidth - 60;
-
-    const wordCount = div.innerText.length;
-    const wordCountPerLine = Math.floor(width / wordWidth);
-    const lineCount = Math.ceil(wordCount / wordCountPerLine);
-
-    setTimeout(() => {
-      scrollToBottom();
-    }, 10);
-    return Math.max(height, lineCount * wordHeight + 20);
-  };
-
-  const scrollToBottom = () => {
-    if (chatboxRef.current) {
-      chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
-    }
-  };
-
   const getMap = () => {
     if (!listRef.current) {
       listRef.current = new Map<number, HTMLDivElement>();
@@ -85,12 +59,12 @@ const Chatbox: FC = () => {
 
   return (
     <div
-      className="mt-[5rem] justify-center bg-second-background w-full h-full flex items-center"
+      className="mt-[5rem] justify-center bg-second-background w-full h-[70vh] flex items-center rounded-3xl"
       id="Chat"
     >
-      <div className="w-[70%] mt-[5rem] mb-[5rem]">
-        <div className="chatarea">
-          <div className="chatbox" ref={chatboxRef}>
+      <div className="w-[75vw] mt-[5rem] mb-[5rem] relative h-[80%]">
+        <div className="border bg-white w-full h-full px-[10px] py-[10px] rounded-3xl flex flex-col">
+          <div id="chatbox" className="flex flex-col h-full" ref={chatboxRef}>
             {messages.map((message, index) => {
               return (
                 <div
@@ -103,12 +77,13 @@ const Chatbox: FC = () => {
                     }
                   }}
                   className={
-                    'chat-list-item ' + (index % 2 == 0 ? 'even' : 'odd')
+                    (index % 2 == 0 ? 'bg-lightblue' : '') +
+                    ' rounded-full min-h-[60px] p-[10px] flex items-center'
                   }
                   key={index}
-                  style={{ minHeight: minHeight(getMap().get(index)) }}
+                  // style={{ minHeight: minHeight(getMap().get(index)) }}
                 >
-                  <div className="sender">
+                  <div className="pr-[5px]">
                     {message.sender.charAt(0).toUpperCase() +
                       message.sender.slice(1) +
                       ':'}
@@ -120,6 +95,7 @@ const Chatbox: FC = () => {
             })}
           </div>
           <input
+            className="rounded-3xl shadow min-h-[60px]"
             disabled={inputFinished}
             ref={inputRef}
             type="text"
@@ -127,7 +103,7 @@ const Chatbox: FC = () => {
             onKeyDown={sendMessage}
           ></input>
         </div>
-        <div className="clear"></div>
+        <div className=""></div>
       </div>
     </div>
   );

@@ -12,8 +12,8 @@ const About: FC = () => (
     "
   >
     <TopBar />
-    <div className=" w-[95%] max-w-[1200px] mx-auto flex flex-auto my-[3rem]">
-      <div className="float-right overflow-hidden flex-1 font pr-[20%]">
+    <div className=" w-[95%] max-w-[1200px] mx-[50px] flex flex-auto my-[3rem]">
+      <div className="float-right overflow-hidden flex-1 font pr-[30px]">
         <h1 style={{ fontStyle: 'italic' }}>
           Hi There, My name is {GetText.name()}
         </h1>
@@ -33,7 +33,7 @@ const About: FC = () => (
         <br />
         <p>Play a game with me!</p>
       </div>
-      <div className="float-left w-[25rem] h-[25rem] relative">
+      <div className="float-left w-[25vw] h-[25vw] relative">
         <Image src="/selfie.png" alt="Selfie" fill className="float-right" />
       </div>
       <div className="clear"></div>
