@@ -17,37 +17,46 @@ export const smoothScroll = (
 
 const TopBar: FC = () => {
   return (
-    <div id="TopNavBar" className="flex flex-row w-11/12 justify-evenly">
-      <div>
-        <Image src="/irving-ou.svg" alt="logo" width={228} height={53.05} />
+    <div
+      id="TopNavBar"
+      className="flex flex-row w-[95%] 
+    justify-evenly mt-[1rem] mb-[3rem] "
+    >
+      <div className="flex-1 flex flex-col">
+        <div className="flex flex-row relative flex-1 ">
+          <Image src="/irving-ou.svg" alt="logo" fill className="mt-[1rem]" />
+        </div>
       </div>
 
-      <div>
-        <a href="#" onClick={(e) => e.preventDefault()}>
-          <span></span>
-        </a>
-        <nav>
-          <div>
-            <ul className="flex ">
-              <li>
+      <div
+        className="flex-grow-[1] flex-shrink-[1] pl-[20%]
+         h-full"
+      >
+        <nav
+          className="list-disc m-4 ml-10 min-h-full
+        float-right min-w-full rounded-full bg-white"
+        >
+          <div className="min-h-full">
+            <ul className="flex m-4 pl-10  min-h-full">
+              <li className=" flex-1">
                 <a href="#">About</a>
               </li>
-              <li>
+              <li className="flex-1">
                 <a href="#Game" onClick={smoothScroll}>
                   Game
                 </a>
               </li>
-              <li>
+              <li className="flex-1">
                 <a href="#Chat" onClick={smoothScroll}>
                   Chat
                 </a>
               </li>
-              <li>
+              <li className="flex-1">
                 <a href="#Links" onClick={smoothScroll}>
                   Links
                 </a>
               </li>
-              <li>
+              <li className="flex-1">
                 <a href="#Contact" onClick={smoothScroll}>
                   Contact
                 </a>
@@ -56,11 +65,16 @@ const TopBar: FC = () => {
           </div>
         </nav>
       </div>
-      <div className="flex">
-        <Image src="/01.png" alt="phone" width={28} height={14} />
-        {GetText.phone()}
+      <div className="flex-1 flex flex-col justify-center items-center ">
+        <div className="flex-1" />
+        <div className="flex-1 flex">
+          <div className="h-[30px] w-[30px] relative mr-[10px] ">
+            <Image src="/01.png" alt="phone" fill />
+          </div>
+          {GetText.phone()}
+        </div>
+        <div className="flex-1" />
       </div>
-      <div></div>
     </div>
   );
 };

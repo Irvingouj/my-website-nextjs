@@ -1,4 +1,4 @@
-import { GetText } from '../../utils/TextSource';
+import { GetText } from '../utils/TextSource';
 import TopBar from '@/components/NavBar/TopNavBar';
 import Image from 'next/image';
 import { FC } from 'react';
@@ -6,11 +6,14 @@ import { FC } from 'react';
 const About: FC = () => (
   <div
     id="About"
-    className="w-full mt-[2rem] pt-[0.18rem] pb-[0.46rem] bg-main-background flex flex-col"
+    className="w-full mt-[2rem] pt-[0.18rem] pb-[0.46rem] 
+    bg-main-background flex flex-col min-h-[60vh] items-center
+    rounded-xl
+    "
   >
     <TopBar />
-    <div className=" w-[95%] max-w-[1200px] mx-auto flex flex-auto">
-      <div className="float-right overflow-hidden flex-1 font">
+    <div className=" w-[95%] max-w-[1200px] mx-auto flex flex-auto my-[3rem]">
+      <div className="float-right overflow-hidden flex-1 font pr-[20%]">
         <h1 style={{ fontStyle: 'italic' }}>
           Hi There, My name is {GetText.name()}
         </h1>
@@ -30,14 +33,8 @@ const About: FC = () => (
         <br />
         <p>Play a game with me!</p>
       </div>
-      <div className="flex-1 float-right">
-        <Image
-          src="/selfie.png"
-          alt="Selfie"
-          width={300}
-          height={300}
-          className="float-right"
-        />
+      <div className="float-left w-[25rem] h-[25rem] relative">
+        <Image src="/selfie.png" alt="Selfie" fill className="float-right" />
       </div>
       <div className="clear"></div>
     </div>

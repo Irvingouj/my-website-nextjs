@@ -1,6 +1,6 @@
+import About from '@/components/About';
 import Chatbox from '@/components/Chatbox';
 import Contacts from '@/components/Contacts';
-import About from '@/components/Game/About';
 import GameWrapper from '@/components/GameWrapper';
 import LinksWrapper from '@/components/LinksWrapper';
 import Seo from '@/components/Seo';
