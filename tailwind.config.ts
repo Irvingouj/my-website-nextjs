@@ -20,6 +20,7 @@ export default {
       backgroundImage: {
         'main-background': 'url("/images/background1.jpg")',
         'second-background': 'url("/images/background2.jpg")',
+        'heading-background': 'url("/images/background-heading.png")',
       },
     },
   },

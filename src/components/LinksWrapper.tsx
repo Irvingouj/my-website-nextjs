@@ -1,14 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import { FC } from 'react';
 
 const LinksWrapper: FC = () => {
   return (
-    <div id="links-wrapper" className="mt-[5rem] mb-[5rem] px-[5rem]">
-      <div className="w">
-        <ul className="flex justify-center ">
-          <li className="flex-1 mx-[5rem] bg-main-background">
-            <div className="img">
+    <div id="links-wrapper" className="mt-[3rem] mb-[3rem] px-[5rem]">
+      <div className=" h-[70vh]">
+        <ul className="flex justify-between h-full">
+          <li className="flex-1 mx-[2rem] bg-second-background rounded-3xl flex flex-col h-full p-[2rem] max-w-[500px]">
+            <div className=" rounded relative h-[70%]">
               <a
+                className="block w-full h-full relative overflow-hidden rounded-3xl"
                 href="Software_Engineer_Resume__8.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -16,13 +18,15 @@ const LinksWrapper: FC = () => {
                 <Image
                   src="/resume-icon.jpg"
                   alt="Resume Icon"
-                  width={100}
-                  height={100}
+                  fill
+                  className="rounded-3xl object-cover w-full h-full"
                 />
-                <h3>Resume</h3>
+                <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full">
+                  Resume
+                </h3>
               </a>
             </div>
-            <div className="txt">
+            <div className="mt-[1rem]">
               <p>
                 You looking for a software engineer with a passion for
                 technology? Look no further! I guarantee you that I am the best
@@ -38,19 +42,23 @@ const LinksWrapper: FC = () => {
               </a>
             </div>
           </li>
-          <li className="flex-1 mx-[5rem] bg-main-background">
-            <div className="img">
-              <a href="https://github.com/Irvingouj/my-website">
-                <Image
+          <li className="flex-1 mx-[2rem] bg-second-background rounded-3xl flex flex-col justify-between h-full max-w-[500px] p-[2rem]">
+            <div className="h-auto flex justify-center mb-[2rem]">
+              <a
+                href="https://github.com/Irvingouj/my-website"
+                className="block relative overflow-hidden rounded-3xl"
+              >
+                <img
                   src="/openai-react-logo.png"
                   alt="OpenAI React Logo"
-                  width={100}
-                  height={100}
+                  // className=' object-center'
                 />
-                <h3>Fun fact about this website</h3>
+                <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full">
+                  Fun fact about this website
+                </h3>
               </a>
             </div>
-            <div className="txt">
+            <div className="flex justify-end flex-col h-auto">
               <p>
                 This personal portfolio website is designed to showcase my
                 skills and experiences, built using the latest technologies such
@@ -64,7 +72,6 @@ const LinksWrapper: FC = () => {
                 kept confidential (Beware Open AI has access to it). So go
                 ahead, ask away!
               </p>
-              <a href="https://github.com/Irvingouj/my-website">Website Repo</a>
             </div>
           </li>
         </ul>
