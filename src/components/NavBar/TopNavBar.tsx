@@ -2,6 +2,11 @@ import { GetText } from '../../utils/TextSource';
 import Image from 'next/image';
 import React, { FC } from 'react';
 
+interface MenuItem {
+  id: string;
+  text: string;
+}
+
 export const smoothScroll = (
   e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
 ) => {
@@ -16,6 +21,14 @@ export const smoothScroll = (
 };
 
 const TopBar: FC = () => {
+  const menuItems: MenuItem[] = [
+    { id: 'About', text: 'About' },
+    { id: 'Game', text: 'Game' },
+    { id: 'Chat', text: 'Chat' },
+    { id: 'Links', text: 'Links' },
+    { id: 'Contact', text: 'Contact' },
+  ];
+
   return (
     <div
       id="TopNavBar"
@@ -29,7 +42,7 @@ const TopBar: FC = () => {
       </div>
 
       <div
-        className="flex-grow-[1] flex-shrink-[1] pl-[20%]
+        className="flex-grow-[1] flex-shrink-[1] ml-[20%]
          h-full"
       >
         <nav
@@ -37,30 +50,17 @@ const TopBar: FC = () => {
         float-right min-w-full rounded-full bg-white"
         >
           <div className="min-h-full">
-            <ul className="flex m-4 pl-10  min-h-full">
-              <li className=" flex-1">
-                <a href="#">About</a>
-              </li>
-              <li className="flex-1">
-                <a href="#Game" onClick={smoothScroll}>
-                  Game
-                </a>
-              </li>
-              <li className="flex-1">
-                <a href="#Chat" onClick={smoothScroll}>
-                  Chat
-                </a>
-              </li>
-              <li className="flex-1">
-                <a href="#Links" onClick={smoothScroll}>
-                  Links
-                </a>
-              </li>
-              <li className="flex-1">
-                <a href="#Contact" onClick={smoothScroll}>
-                  Contact
-                </a>
-              </li>
+            <ul className="flex min-h-[5vh]">
+              {menuItems.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex-1 text-center rounded-full align-middle flex flex-col justify-center hover:bg-sky-300 m-[5px] duration-500"
+                >
+                  <a href={`#${item.id}`} onClick={smoothScroll}>
+                    {item.text}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </nav>

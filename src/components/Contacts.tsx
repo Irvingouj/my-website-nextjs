@@ -9,14 +9,14 @@ const Contacts: FC = () => (
     id="Contact"
   >
     <div className="flex flex-col justify-evenly h-full">
-      <p className="flex ml-[0.5rem] mb-[0.5rem]">
+      <div className="flex ml-[0.5rem] mb-[0.5rem]">
         <div className="flex justify-center flex-col mr-[1rem]">
           <div className="relative w-[1rem] h-[1rem]">
             <Image src="/15.png" alt="Email" fill />
           </div>
         </div>
         {GetText.email()}
-      </p>
+      </div>
       <div className="flex justify-around max-w-[80%]">
         <a href={GetText.linkedin()} className="bg-[#f2f6fa] rounded-full">
           <Image src="/16.png" alt="LinkedIn" width={40} height={40} />

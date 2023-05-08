@@ -50,6 +50,13 @@ const Chatbox: FC = () => {
     }
   }, [inputFinished]);
 
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.blur();
+  }, []);
+
   const getMap = () => {
     if (!listRef.current) {
       listRef.current = new Map<number, HTMLDivElement>();
@@ -78,10 +85,9 @@ const Chatbox: FC = () => {
                   }}
                   className={
                     (index % 2 == 0 ? 'bg-lightblue' : '') +
-                    ' rounded-full min-h-[60px] p-[10px] flex items-center'
+                    ' rounded-full min-h-[60px] p-[10px] flex items-center text-xl tracking-wide'
                   }
                   key={index}
-                  // style={{ minHeight: minHeight(getMap().get(index)) }}
                 >
                   <div className="pr-[5px]">
                     {message.sender.charAt(0).toUpperCase() +
@@ -95,7 +101,7 @@ const Chatbox: FC = () => {
             })}
           </div>
           <input
-            className="rounded-3xl shadow min-h-[60px]"
+            className="rounded-3xl shadow-md min-h-[60px] border-[1px] border-gray-400 p-[10px]]"
             disabled={inputFinished}
             ref={inputRef}
             type="text"

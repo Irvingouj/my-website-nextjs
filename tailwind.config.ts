@@ -8,6 +8,8 @@ export default {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      fontSize: {},
+      fontWeight: {},
       colors: {
         dark: '#222222',
         lightblue: '#f3f6fb;',

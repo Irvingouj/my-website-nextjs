@@ -1,5 +1,5 @@
 const BasicInfoSource = {
-  name: 'Irving Ou',
+  name: 'Irving',
   email: 'oujunyiirving@gmail.com',
   phone: '+1 289-788-6925',
   github: 'https://github.com/Irvingouj',
