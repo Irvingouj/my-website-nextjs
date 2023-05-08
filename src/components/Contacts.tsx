@@ -32,21 +32,35 @@ const Contacts: FC = () => (
     </div>
     <div className="flex flex-col justify-between h-full">
       <p className="text-center text-xl mb-[1rem]">Contact me</p>
-      <h3 className="text-blue-500 text-4xl mb-[1rem]">{GetText.phone()}</h3>
+      <h3 className="text-blue-500 text-4xl mb-[1rem] font-sans">
+        {GetText.phone()}
+      </h3>
       <div className="flex justify-center align-middle">
         <LinkButton href={`mailto: ${GetText.email()}`}>Send emails</LinkButton>
       </div>
     </div>
     <div className="float-right">
-      <p>Quick navigation</p>
-      <div className="flex flex-col mt-[2rem] justify-evenly">
-        <a href="#" onClick={smoothScroll} className="font-fgrey">
+      <p className="text-lg">Quick navigation</p>
+      <div className="flex flex-col mt-[1rem] justify-evenly">
+        <a
+          href="#"
+          onClick={smoothScroll}
+          className="text-fgery mt-[0.5rem] text-xl"
+        >
           About
         </a>
-        <a href="#Game" onClick={smoothScroll} className="">
+        <a
+          href="#Game"
+          onClick={smoothScroll}
+          className="text-fgery mt-[1rem] text-xl"
+        >
           Game
         </a>
-        <a href="#Chat" onClick={smoothScroll} className="">
+        <a
+          href="#Chat"
+          onClick={smoothScroll}
+          className="text-fgery mt-[1rem] text-xl"
+        >
           Chat
         </a>
       </div>

@@ -65,7 +65,7 @@ const TopBar: FC = () => {
           </div>
         </nav>
       </div>
-      <div className="flex-1 flex flex-col justify-center items-center ">
+      <div className="flex-1 flex flex-col justify-center items-center font-sans">
         <div className="flex-1" />
         <div className="flex-1 flex">
           <div className="h-[30px] w-[30px] relative mr-[10px] ">
