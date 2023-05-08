@@ -6,14 +6,18 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        primary: ['Inter', ...defaultTheme.fontFamily.serif],
       },
       fontSize: {},
       fontWeight: {},
       colors: {
         dark: '#222222',
         lightblue: '#f3f6fb;',
+        'button-blue': '#87cefa',
+        'links-text': '#777',
+        fgery: '#777',
       },
+
       keyframes: {},
       animation: {
         flicker: 'flicker 3s linear infinite',

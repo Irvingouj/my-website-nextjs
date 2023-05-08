@@ -12,7 +12,7 @@ const About: FC = () => (
     "
   >
     <TopBar />
-    <div className=" w-[95%] mx-[50px] flex flex-auto my-[3rem] px-[150px]">
+    <div className=" w-[95%] mx-[50px] flex flex-auto my-[3rem] px-[9vw]">
       <div className="float-right flex-1 font pr-[30px] flex flex-col justify-between">
         <div>
           <h1 className="italic text-5xl">

@@ -1,3 +1,4 @@
+import LinkButton from '@/components/LinkButton';
 import { smoothScroll } from '@/components/NavBar/TopNavBar';
 import { GetText } from '@/utils/TextSource';
 import Image from 'next/image';
@@ -30,22 +31,22 @@ const Contacts: FC = () => (
       </div>
     </div>
     <div className="flex flex-col justify-between h-full">
-      <p className="text-center">Contact me</p>
-      <h3>{GetText.phone()}</h3>
-      <a href={`mailto: ${GetText.email()}`} className="text-center">
-        Send emails
-      </a>
+      <p className="text-center text-xl mb-[1rem]">Contact me</p>
+      <h3 className="text-blue-500 text-4xl mb-[1rem]">{GetText.phone()}</h3>
+      <div className="flex justify-center align-middle">
+        <LinkButton href={`mailto: ${GetText.email()}`}>Send emails</LinkButton>
+      </div>
     </div>
-    <div className=" float-right">
+    <div className="float-right">
       <p>Quick navigation</p>
-      <div className="flex flex-col">
-        <a href="#" onClick={smoothScroll}>
+      <div className="flex flex-col mt-[2rem] justify-evenly">
+        <a href="#" onClick={smoothScroll} className="font-fgrey">
           About
         </a>
-        <a href="#Game" onClick={smoothScroll}>
+        <a href="#Game" onClick={smoothScroll} className="">
           Game
         </a>
-        <a href="#Chat" onClick={smoothScroll}>
+        <a href="#Chat" onClick={smoothScroll} className="">
           Chat
         </a>
       </div>
