@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { Message } from '@/types/chatboxTypes';
 import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 import { Readable } from 'stream';
@@ -6,16 +7,19 @@ import { Readable } from 'stream';
 const CHAT_URL = 'https://api.openai.com/v1/chat/completions';
 
 export default async function chat(req: NextApiRequest, res: NextApiResponse) {
-  // console.debug(process.env.OPENAI_API_KEY);
-
+  console;
+  const messages = JSON.parse(req.body).messages as Message[];
+  if (!messages) {
+    return res.status(400).json({ error: 'Missing messages' });
+  }
   const raw = JSON.stringify({
     model: 'gpt-3.5-turbo',
-    messages: [
-      {
-        role: 'user',
-        content: 'Hello!',
-      },
-    ],
+    messages: messages.map((m) => {
+      return {
+        role: m.role,
+        content: m.content,
+      };
+    }),
     stream: true,
   });
 
@@ -40,7 +44,7 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
   const nodeStream = Readable.from(openai_response.body);
 
   nodeStream.on('data', (chunk) => {
-    res.write(chunk);
+    res.write(chunk.toString());
   });
   nodeStream.on('end', () => {
     res.end();

@@ -1,13 +1,12 @@
 {
   "css.validate": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.organizeImports": true,
     "source.fixAll.eslint": true
   },
-  "headwind.runOnSave": false,
   "eslint.validate": ["typescript", "typescriptreact"],
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "editor.quickSuggestions": {

@@ -1,13 +1,15 @@
 import { Data, Message, Role } from '@/types/chatboxTypes';
 import React, { FC, useEffect, useState } from 'react';
 
+const DEFAULT_MESSAGES: Message[] = [
+  {
+    content: 'Hello,is there anything you wanna know about me?',
+    role: Role.Assisstant,
+  },
+];
+
 const Chatbox: FC = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      content: 'Hello,is there anything you wanna know about me?',
-      role: Role.Assisstant,
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(DEFAULT_MESSAGES);
   const [inputFinished, setInputFinished] = useState<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const chatboxRef = React.useRef<HTMLDivElement>(null);
@@ -35,7 +37,14 @@ const Chatbox: FC = () => {
   };
 
   const streamingRespones = async () => {
-    const response = await fetch('/api/chat');
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {},
+      body: JSON.stringify({
+        //messages except the last one
+        messages: messages.slice(0, -1),
+      }),
+    });
     if (!response.body) {
       return;
     }
@@ -54,7 +63,11 @@ const Chatbox: FC = () => {
           if (data.includes('[DONE]')) {
             return null;
           }
-          return JSON.parse(data.replace('data: ', '')) as Data;
+          try {
+            return JSON.parse(data.replace('data: ', '')) as Data;
+          } catch (e) {
+            return null;
+          }
         });
 
       for (const data of datas) {
@@ -85,7 +98,12 @@ const Chatbox: FC = () => {
     }
   }, [inputFinished]);
 
-  // ...
+  useEffect(() => {
+    if (!chatboxRef.current) {
+      return;
+    }
+    chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
+  }, [messages]);
 
   useEffect(() => {
     if (!inputRef.current) {
@@ -103,12 +121,16 @@ const Chatbox: FC = () => {
 
   return (
     <div
-      className="flex mt-[5rem] justify-center bg-second-background w-full h-[70vh] items-center rounded-3xl"
+      className="flex mt-[5rem] justify-center bg-second-background w-full h-[70vh] items-center rounded-xl"
       id="Chat"
     >
       <div className=" w-[90vw] my-[1rem] relative h-[97%] sm:h-[80%] sm:w-[75vw] sm:my-[5rem]">
-        <div className="border bg-white w-full h-full px-[10px] py-[10px] rounded-3xl flex flex-col">
-          <div id="chatbox" className="flex flex-col h-full" ref={chatboxRef}>
+        <div className="border bg-white w-full h-full px-[10px] py-[10px] rounded-xl flex flex-col">
+          <div
+            id="chatbox"
+            className="h-full overflow-y-scroll"
+            ref={chatboxRef}
+          >
             {messages.map((message, index) => {
               return (
                 <div
@@ -122,17 +144,21 @@ const Chatbox: FC = () => {
                   }}
                   className={
                     (index % 2 == 0 ? 'bg-lightblue' : '') +
-                    ' rounded-full min-h-[60px] p-[10px] flex items-center text-sm sm:text-xl tracking-wide'
+                    ' rounded-xl min-h-[60px] h-fit p-[10px] flex flex-col justify-center text-sm sm:text-xl tracking-wide '
                   }
                   key={index}
                 >
-                  <div className="hidden sm:block pr-[5px]">
-                    {message.role.charAt(0).toUpperCase() +
-                      message.role.slice(1) +
-                      ':'}
-                  </div>
+                  <div className="flex items-baseline">
+                    <div className="hidden sm:flex sm:flex-col sm:justify-start pr-[5px] min-w-[100px] mt-1">
+                      <div className="align-top float-right text-right">
+                        {message.role.charAt(0).toUpperCase() +
+                          message.role.slice(1) +
+                          ':'}
+                      </div>
+                    </div>
 
-                  <span className="text">{message.content}</span>
+                    <span className="text">{message.content}</span>
+                  </div>
                 </div>
               );
             })}

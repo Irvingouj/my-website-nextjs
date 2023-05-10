@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
