@@ -32,10 +32,10 @@ const TopBar: FC = () => {
   return (
     <div
       id="TopNavBar"
-      className="flex flex-row w-[95%] 
+      className=" hidden sm:flex flex-row w-[95%] 
     justify-evenly mt-[1rem] mb-[3rem] "
     >
-      <div className="flex-1 flex flex-col">
+      <div className="hidden sm:flex flex-1 flex-col">
         <div className="flex flex-row relative flex-1 ">
           <Image src="/irving-ou.svg" alt="logo" fill className="mt-[1rem]" />
         </div>
@@ -46,15 +46,15 @@ const TopBar: FC = () => {
          h-full"
       >
         <nav
-          className="list-disc m-4 ml-10 min-h-full
-        float-right min-w-full rounded-full bg-white"
+          className="list-disc m-4 min-h-full
+         min-w-full rounded-full bg-white sm:ml-10 float-right"
         >
           <div className="min-h-full">
             <ul className="flex min-h-[5vh]">
               {menuItems.map((item) => (
                 <li
                   key={item.id}
-                  className="flex-1 text-center rounded-full align-middle flex flex-col justify-center hover:bg-sky-300 m-[5px] duration-500"
+                  className="flex-1 text-center rounded-full align-middle flex flex-col justify-center hover:bg-button-blue m-[5px] duration-500"
                 >
                   <a href={`#${item.id}`} onClick={smoothScroll}>
                     {item.text}
@@ -65,13 +65,14 @@ const TopBar: FC = () => {
           </div>
         </nav>
       </div>
-      <div className="flex-1 flex flex-col justify-center items-center font-sans">
+
+      <div className="hidden sm:flex flex-1 flex-col justify-center items-center font-sans">
         <div className="flex-1" />
         <div className="flex-1 flex">
           <div className="h-[30px] w-[30px] relative mr-[10px] ">
             <Image src="/01.png" alt="phone" fill />
           </div>
-          {GetText.phone()}
+          <p>{GetText.phone()}</p>
         </div>
         <div className="flex-1" />
       </div>

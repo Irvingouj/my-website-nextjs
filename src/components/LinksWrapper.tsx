@@ -5,10 +5,10 @@ import { FC } from 'react';
 
 const LinksWrapper: FC = () => {
   return (
-    <div id="links-wrapper" className="mt-[3rem] mb-[3rem] px-[5rem]">
-      <div className=" h-[70vh]">
+    <div id="links-wrapper" className=" mt-[3rem] mb-[3rem] sm:px-[5rem]">
+      <div className="h-[180vh] sm:h-[70vh]">
         <ul className="flex justify-between h-full flex-col md:flex-row">
-          <li className="flex-1 mx-[2rem] bg-second-background rounded-3xl flex flex-col h-full p-[2rem] max-w-[500px] background-cover ">
+          <li className="mb-[2rem] sm:mb-0 sm:flex-1 sm:mx-[2rem] bg-second-background bg-cover rounded-3xl flex flex-col h-full p-[2rem] max-w-[500px] background-cover overflow-hidden">
             <div className=" rounded relative flex-1">
               <a
                 className="block w-full h-full relative overflow-hidden rounded-3xl"
@@ -22,7 +22,7 @@ const LinksWrapper: FC = () => {
                   fill
                   className="rounded-3xl object-cover w-full h-full"
                 />
-                <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white">
+                <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white bg-cover">
                   Resume
                 </h3>
               </a>
@@ -47,7 +47,7 @@ const LinksWrapper: FC = () => {
               </LinkButton>
             </div>
           </li>
-          <li className="flex-1 mx-[2rem] bg-second-background rounded-3xl flex flex-col justify-between h-full max-w-[500px] p-[2rem]">
+          <li className="sm:flex-1 sm:mx-[2rem] bg-second-background bg-cover rounded-3xl flex flex-col justify-between h-full max-w-[500px] p-[2rem] overflow-hidden">
             <div className="h-auto flex justify-center mb-[2rem]">
               <a
                 href="https://github.com/Irvingouj/my-website"
@@ -58,12 +58,12 @@ const LinksWrapper: FC = () => {
                   alt="OpenAI React Logo"
                   // className=' object-center'
                 />
-                <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white">
+                <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white bg-cover">
                   Fun fact about this website
                 </h3>
               </a>
             </div>
-            <div className="flex justify-end flex-col h-auto">
+            <div className="flex justify-end flex-col">
               <p
                 className="text-base font-serif whitespace-normal 
               leading-relaxed indent-8 text-links-text

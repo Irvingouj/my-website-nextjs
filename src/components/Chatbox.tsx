@@ -103,10 +103,10 @@ const Chatbox: FC = () => {
 
   return (
     <div
-      className="mt-[5rem] justify-center bg-second-background w-full h-[70vh] flex items-center rounded-3xl"
+      className="flex mt-[5rem] justify-center bg-second-background w-full h-[70vh] items-center rounded-3xl"
       id="Chat"
     >
-      <div className="w-[75vw] mt-[5rem] mb-[5rem] relative h-[80%]">
+      <div className=" w-[90vw] my-[1rem] relative h-[97%] sm:h-[80%] sm:w-[75vw] sm:my-[5rem]">
         <div className="border bg-white w-full h-full px-[10px] py-[10px] rounded-3xl flex flex-col">
           <div id="chatbox" className="flex flex-col h-full" ref={chatboxRef}>
             {messages.map((message, index) => {
@@ -122,11 +122,11 @@ const Chatbox: FC = () => {
                   }}
                   className={
                     (index % 2 == 0 ? 'bg-lightblue' : '') +
-                    ' rounded-full min-h-[60px] p-[10px] flex items-center text-xl tracking-wide'
+                    ' rounded-full min-h-[60px] p-[10px] flex items-center text-sm sm:text-xl tracking-wide'
                   }
                   key={index}
                 >
-                  <div className="pr-[5px]">
+                  <div className="hidden sm:block pr-[5px]">
                     {message.role.charAt(0).toUpperCase() +
                       message.role.slice(1) +
                       ':'}

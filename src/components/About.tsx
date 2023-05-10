@@ -12,13 +12,13 @@ const About: FC = () => (
     "
   >
     <TopBar />
-    <div className=" w-[95%] mx-[50px] flex flex-auto my-[3rem] px-[9vw]">
-      <div className="float-right flex-1 font pr-[30px] flex flex-col justify-between">
+    <div className=" w-full flex flex-auto my-[3rem] px-[9vw] sm:mx-[50px]">
+      <div className="float-right flex-1 font flex flex-col justify-between sm:pr-[30px]">
         <div>
-          <h1 className="italic text-5xl">
+          <h1 className="italic text-xl sm:text-5xl">
             Hi There, My name is {GetText.name()}
           </h1>
-          <p className="text-xl font-serif mt-[5vh] whitespace-normal pr-[5vw] leading-relaxed indent-16 tracking-normal">
+          <p className="text-xs font-serif mt-[5vh] whitespace-normal leading-relaxed indent-16 tracking-normal sm:text-xl pr-[5vw]">
             Hi there! So excited to see you! I'm a fourth-year student from
             Carleton University with a double major in Math and Computer
             Science, and I'm eager to bring my skills and experience to the next

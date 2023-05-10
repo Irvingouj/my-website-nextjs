@@ -13,7 +13,7 @@ export default function HomePage() {
       <Seo />
       <main>
         <div
-          className="flex flex-col items-center px-8"
+          className="flex flex-col items-center w-full px-4 sm:px-8"
           style={{ scrollBehavior: 'smooth' }}
         >
           <About />

@@ -56,8 +56,8 @@ const Game: FC = () => {
   }, [board]);
 
   return (
-    <div className="Game">
-      <div className="BoardWrapper">
+    <div className="">
+      <div className="">
         <Board
           board={board}
           handleUserClick={handleUserClick}

@@ -12,7 +12,7 @@ export default function Document() {
           crossOrigin="anonymous"
         />
       </Head>
-      <body className="h-full">
+      <body className="h-full w-full ">
         <Main />
         <NextScript />
       </body>

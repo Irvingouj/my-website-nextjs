@@ -169,7 +169,6 @@ const Board: FC<BoardProps> = (prop: BoardProps) => {
     <canvas
       width={500}
       height={300}
-      style={{ width: '500px', height: '300px' }}
       className={styles.board}
       ref={canvasref}
       onClick={handleClick}
