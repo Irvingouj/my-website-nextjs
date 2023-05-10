@@ -1,11 +1,11 @@
-import { Message, getResponse } from '../utils/ChatService';
+import { Data, Message, Role } from '@/types/chatboxTypes';
 import React, { FC, useEffect, useState } from 'react';
 
 const Chatbox: FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       content: 'Hello,is there anything you wanna know about me?',
-      sender: 'me',
+      role: Role.Assisstant,
     },
   ]);
   const [inputFinished, setInputFinished] = useState<boolean>(false);
@@ -13,41 +13,79 @@ const Chatbox: FC = () => {
   const chatboxRef = React.useRef<HTMLDivElement>(null);
   const listRef = React.useRef<Map<number, HTMLDivElement> | null>(null);
 
-  const sendMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const sendMessage = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!inputRef.current) {
       return;
     }
-    if (e.key === 'Enter') {
-      const newMessage = {
-        content: inputRef.current.value,
-        sender: 'you',
-      };
-      setMessages([...messages, newMessage]);
-      inputRef.current.value = '';
-      setInputFinished(true);
+    if (e.key !== 'Enter') {
+      return;
+    }
+    const newUserMessage = {
+      content: inputRef.current.value,
+      role: Role.User,
+    };
+
+    const newAssisstantMessage = {
+      content: '',
+      role: Role.Assisstant,
+    };
+    setMessages([...messages, newUserMessage, newAssisstantMessage]);
+    inputRef.current.value = '';
+    setInputFinished(true);
+  };
+
+  const streamingRespones = async () => {
+    const response = await fetch('/api/chat');
+    if (!response.body) {
+      return;
+    }
+    const reader = response.body.getReader();
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        return;
+      }
+      const decoded_data = new TextDecoder('utf-8').decode(value).trim();
+      const datas = decoded_data
+        .split('\n')
+        .filter((data) => data.startsWith('data: '))
+        .map((data) => {
+          if (data.includes('[DONE]')) {
+            return null;
+          }
+          return JSON.parse(data.replace('data: ', '')) as Data;
+        });
+
+      for (const data of datas) {
+        if (data === null) {
+          setInputFinished(false);
+          return;
+        }
+
+        const delta = data.choices[0].delta;
+        if ('role' in delta || delta.content == undefined) {
+          continue;
+        }
+
+        const chunk = delta.content;
+        const lastMessage = messages[messages.length - 1];
+        const newMessage = {
+          ...lastMessage,
+          content: (lastMessage.content += chunk),
+        };
+        setMessages([...messages.slice(0, -1), newMessage]);
+      }
     }
   };
 
   useEffect(() => {
-    if (!inputFinished) {
-      return;
-    }
-
-    async function getResponseFromServer() {
-      const res = await getResponse(messages);
-      setMessages([...messages, { content: res, sender: 'Me' }]);
-      setInputFinished(false);
-    }
-
-    try {
-      getResponseFromServer();
-    } catch (e) {
-      setMessages([
-        ...messages,
-        { content: 'Sorry,OpenAI refuse to answer', sender: 'Me' },
-      ]);
+    if (inputFinished) {
+      streamingRespones();
     }
   }, [inputFinished]);
+
+  // ...
 
   useEffect(() => {
     if (!inputRef.current) {
@@ -89,8 +127,8 @@ const Chatbox: FC = () => {
                   key={index}
                 >
                   <div className="pr-[5px]">
-                    {message.sender.charAt(0).toUpperCase() +
-                      message.sender.slice(1) +
+                    {message.role.charAt(0).toUpperCase() +
+                      message.role.slice(1) +
                       ':'}
                   </div>
 
@@ -100,7 +138,7 @@ const Chatbox: FC = () => {
             })}
           </div>
           <input
-            className="rounded-3xl shadow-md min-h-[60px] border-[1px] border-gray-400 p-[10px]]"
+            className="rounded-3xl shadow-md min-h-[60px] border-[1px] border-gray-400 p-[10px]] text-xl"
             disabled={inputFinished}
             ref={inputRef}
             type="text"
