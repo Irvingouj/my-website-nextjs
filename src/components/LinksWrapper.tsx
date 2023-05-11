@@ -12,7 +12,7 @@ const LinksWrapper: FC = () => {
             <div className=" rounded relative flex-1">
               <a
                 className="block w-full h-full relative overflow-hidden rounded-3xl"
-                href="Software_Engineer_Resume__8.pdf"
+                href="Irving_Ou_resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
