@@ -1,13 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import Counter from '@/lib/counter';
 import { Message } from '@/types/chatboxTypes';
 import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 import { Readable } from 'stream';
 
 const CHAT_URL = 'https://api.openai.com/v1/chat/completions';
-
+// incaase someone tries to spam the API
+const counter = new Counter();
+const ONE_HOUR = 60 * 60;
 export default async function chat(req: NextApiRequest, res: NextApiResponse) {
-  console;
+  if (counter.getCount() > 100) {
+    return res.status(429).json({ error: 'Too many requests' });
+  }
   const messages = JSON.parse(req.body).messages as Message[];
   if (!messages) {
     return res.status(400).json({ error: 'Missing messages' });
@@ -35,6 +40,8 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
   if (!openai_response || !openai_response.body) {
     return res.status(500).json({ error: 'Error fetching from OpenAI' });
   }
+
+  counter.increment().expires(ONE_HOUR);
 
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');

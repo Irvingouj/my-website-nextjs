@@ -20,7 +20,7 @@ const LinksWrapper: FC = () => {
                   src="/resume-icon.jpg"
                   alt="Resume Icon"
                   fill
-                  className="rounded-3xl object-cover w-full h-full"
+                  className="rounded-3xl object-cover w-full h-full transition-transform duration-300 hover:scale-110"
                 />
                 <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white bg-cover">
                   Resume
@@ -47,17 +47,22 @@ const LinksWrapper: FC = () => {
               </LinkButton>
             </div>
           </li>
-          <li className="sm:flex-1 sm:mx-[2rem] bg-second-background bg-cover rounded-3xl flex flex-col justify-between h-full max-w-[500px] p-[2rem] overflow-hidden">
-            <div className="h-auto flex justify-center mb-[2rem]">
+          <li className="grid sm:flex-1 sm:mx-[2rem] bg-second-background bg-cover rounded-3xl justify-between h-full max-w-[500px] p-[2rem] overflow-hidden">
+            <div className="flex mb-[2rem] h-fit">
               <a
                 href="https://github.com/Irvingouj/my-website"
-                className="block relative overflow-hidden rounded-3xl"
+                className="block overflow-hidden rounded-3xl w-full h-fit relative"
               >
-                <img
-                  src="/openai-react-logo.png"
-                  alt="OpenAI React Logo"
-                  // className=' object-center'
-                />
+                <div className="relative w-full h-fit">
+                  <Image
+                    src="/openai-react-logo.png"
+                    alt="OpenAI React Logo"
+                    width={500}
+                    height={500}
+                    className="transition-transform duration-300 hover:scale-110 object-contain"
+                  />
+                </div>
+
                 <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white bg-cover">
                   Fun fact about this website
                 </h3>

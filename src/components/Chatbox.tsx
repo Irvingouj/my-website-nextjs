@@ -48,6 +48,29 @@ const Chatbox: FC = () => {
     if (!response.body) {
       return;
     }
+
+    if (response.status === 429) {
+      // update the last message to show the error
+      const lastMessage = messages[messages.length - 1];
+      const newMessage = {
+        ...lastMessage,
+        content:
+          'Sorry, you have sent too many requests. Please try again later.',
+      };
+      setMessages([...messages.slice(0, -1), newMessage]);
+      setInputFinished(false);
+    }
+
+    if (response.status === 500) {
+      const lastMessage = messages[messages.length - 1];
+      const newMessage = {
+        ...lastMessage,
+        content: 'Sorry, something went wrong. Please try again later.',
+      };
+      setMessages([...messages.slice(0, -1), newMessage]);
+      setInputFinished(false);
+    }
+
     const reader = response.body.getReader();
     // eslint-disable-next-line no-constant-condition
     while (true) {
