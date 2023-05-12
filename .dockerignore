@@ -1,0 +1,26 @@
+*.env*
+# Ignore node_modules
+node_modules
+
+# Ignore environment file
+.env
+
+# Ignore VSCode directory
+.vscode
+
+# Ignore logs
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
