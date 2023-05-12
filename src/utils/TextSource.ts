@@ -1,3 +1,5 @@
+import { AboutMe, AboutThisSite, DownLoadResume } from '@/utils/text';
+
 const BasicInfoSource = {
   name: 'Irving',
   email: 'oujunyiirving@gmail.com',
@@ -5,6 +7,7 @@ const BasicInfoSource = {
   github: 'https://github.com/Irvingouj',
   linkedin: 'https://www.linkedin.com/in/irving-ou-8b195b1b1/',
   wechat: 'JunyiOu99',
+  gitrepo: 'https://github.com/Irvingouj/my-website-nextjs',
 };
 
 type Texts = {
@@ -40,6 +43,10 @@ export const GetText = {
   github: () => BasicInfoSource.github,
   linkedin: () => BasicInfoSource.linkedin,
   wechat: () => BasicInfoSource.wechat,
+  about: () => AboutMe,
+  resumeIntro: () => DownLoadResume,
+  aboutSite: () => AboutThisSite,
+  gitrepo: () => BasicInfoSource.gitrepo,
   Texts: () => {
     if (Language === 'English') {
       return EnglishTexts;

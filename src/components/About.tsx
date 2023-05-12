@@ -19,16 +19,7 @@ const About: FC = () => (
             Hi There, My name is {GetText.name()}
           </h1>
           <p className="text-xs font-serif mt-[5vh] whitespace-normal leading-relaxed indent-16 tracking-normal sm:text-xl pr-[5vw]">
-            Hi there! So excited to see you! I'm a fourth-year student from
-            Carleton University with a double major in Math and Computer
-            Science, and I'm eager to bring my skills and experience to the next
-            step of my career. I pride myself on being a problem solver with a
-            strong work ethic, and I've received recognition for these qualities
-            from my previous managers and supervisors. I also understand the
-            importance of clear and effective communication, and I always strive
-            to deliver on my promises. I am confident in my abilities, and I am
-            excited to see what the future holds for me in the technology
-            industry.
+            {GetText.about()}
           </p>
         </div>
         <p className="">Play a game with me!</p>

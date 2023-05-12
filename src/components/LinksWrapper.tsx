@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import LinkButton from '@/components/LinkButton';
+import { GetText } from '@/utils/TextSource';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -33,10 +34,7 @@ const LinksWrapper: FC = () => {
               leading-relaxed indent-8 text-links-text
               tracking-normal mb-[1rem]"
               >
-                You looking for a software engineer with a passion for
-                technology? Look no further! I guarantee you that I am the best
-                candidate for the job. Hit the download button below to view my
-                resume!.
+                {GetText.resumeIntro()}
               </p>
               <LinkButton
                 href="Software_Engineer_Resume__8.pdf"
@@ -50,7 +48,7 @@ const LinksWrapper: FC = () => {
           <li className="grid sm:flex-1 sm:mx-[2rem] bg-second-background bg-cover rounded-3xl justify-between h-full max-w-[500px] p-[2rem] overflow-hidden">
             <div className="flex mb-[2rem] h-fit">
               <a
-                href="https://github.com/Irvingouj/my-website"
+                href={`${GetText.gitrepo()}`}
                 className="block overflow-hidden rounded-3xl w-full h-fit relative"
               >
                 <div className="relative w-full h-fit">
@@ -74,18 +72,15 @@ const LinksWrapper: FC = () => {
               leading-relaxed indent-8 text-links-text
               tracking-normal mb-[1rem]"
               >
-                This personal portfolio website is designed to showcase my
-                skills and experiences, built using the latest technologies such
-                as React and Typescript. And, in keeping with my passion for
-                technology, the site features a chatbox powered by OpenAI,
-                allowing visitors to ask me anything and get to know me better.
-                However, if you're looking for my secret OpenAI key, I'm afraid
-                you're out of luck - it's safely stored in my backend service
-                using Azure Functions. And, for those who value their privacy,
-                just know that any information shared in the chatbox will be
-                kept confidential (Beware Open AI has access to it). So go
-                ahead, ask away!
+                {GetText.aboutSite()}
               </p>
+              <LinkButton
+                href={`${GetText.gitrepo()}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Source
+              </LinkButton>
             </div>
           </li>
         </ul>
