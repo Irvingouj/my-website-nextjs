@@ -58,7 +58,7 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
   }
 
   counter.increment().expires(ONE_HOUR);
-  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Content-Type', 'text/plain');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
   res.flushHeaders();
