@@ -92,7 +92,7 @@ const Chatbox: FC = () => {
       const { done, value } = await reader.read();
 
       // eslint-disable-next-line no-console
-      console.log('start streaming');
+      console.log('start streaming', done, value);
       if (done) {
         // eslint-disable-next-line no-console
         console.log('Done streaming');
