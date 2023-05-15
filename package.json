@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@vercel/analytics": "^1.0.1",
     "clsx": "^1.2.1",
     "next": "^13.3.0",
     "node-fetch": "^3.3.1",

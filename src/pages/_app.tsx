@@ -1,6 +1,7 @@
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 import '@/styles/globals.css';
+import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from 'next/app';
 
 /**
@@ -9,7 +10,12 @@ import { AppProps } from 'next/app';
  */
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      <Analytics />
+    </>
+  );
 }
 
 export default MyApp;
