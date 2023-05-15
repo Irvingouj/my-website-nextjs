@@ -67,7 +67,7 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
   const nodeStream = Readable.from(openai_response.body);
 
   nodeStream.on('data', (chunk) => {
-    res.write(chunk.toString());
+    res.write(chunk);
   });
   nodeStream.on('end', () => {
     res.end();
