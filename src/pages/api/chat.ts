@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import Counter from '@/lib/counter';
 import { Message, Role } from '@/types/chatboxTypes';
@@ -52,11 +53,12 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
     openai_response.status === 400 ||
     !openai_response.body
   ) {
+    console.error(openai_response);
     return res.status(500).json({ error: 'Error fetching from OpenAI' });
   }
 
   counter.increment().expires(ONE_HOUR);
-
+  console.log('Request received, Counter: ', counter.getCount());
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
@@ -71,6 +73,7 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
     res.end();
   });
   nodeStream.on('error', (_) => {
+    console.error(_);
     res.status(500).json({ error: 'Error streaming response' });
   });
 }

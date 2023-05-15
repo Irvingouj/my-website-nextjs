@@ -59,6 +59,7 @@ const Chatbox: FC = () => {
       };
       setMessages([...messages.slice(0, -1), newMessage]);
       setInputFinished(false);
+      return;
     }
 
     if (response.status === 500) {
@@ -69,6 +70,20 @@ const Chatbox: FC = () => {
       };
       setMessages([...messages.slice(0, -1), newMessage]);
       setInputFinished(false);
+      return;
+    }
+
+    if (response.status >= 400 && response.status < 500) {
+      // eslint-disable-next-line no-console
+      console.error('Client error');
+      const lastMessage = messages[messages.length - 1];
+      const newMessage = {
+        ...lastMessage,
+        content: 'Sorry, something went wrong. Please try again later.',
+      };
+      setMessages([...messages.slice(0, -1), newMessage]);
+      setInputFinished(false);
+      return;
     }
 
     const reader = response.body.getReader();
