@@ -58,21 +58,7 @@ export default async function chat(req: NextApiRequest, res: NextApiResponse) {
   }
 
   counter.increment().expires(ONE_HOUR);
-  res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.flushHeaders();
 
   const nodeStream = Readable.from(openai_response.body);
-
-  nodeStream.on('data', (chunk) => {
-    res.write(chunk);
-  });
-  nodeStream.on('end', () => {
-    res.end();
-  });
-  nodeStream.on('error', (_) => {
-    console.error(_);
-    res.status(500).json({ error: 'Error streaming response' });
-  });
+  nodeStream.pipe(res);
 }

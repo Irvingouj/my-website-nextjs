@@ -90,16 +90,7 @@ const Chatbox: FC = () => {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const { done, value } = await reader.read();
-
-      // eslint-disable-next-line no-console
-      console.log(
-        'start streaming',
-        done,
-        new TextDecoder('utf-8').decode(value),
-      );
       if (done) {
-        // eslint-disable-next-line no-console
-        console.log('Done streaming');
         return;
       }
       const decoded_data = new TextDecoder('utf-8').decode(value).trim();
