@@ -1,13 +1,12 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import * as React from 'react';
 
 interface Props {
@@ -16,15 +15,31 @@ interface Props {
   author: string;
   date: string;
   image: string;
+  tags: string[];
 }
 
-const PostCard: React.FC<Props> = ({ title, summary, author, date, image }) => {
+const PostCard: React.FC<Props> = ({
+  title,
+  summary,
+  author,
+  date,
+  image,
+  tags,
+}) => {
   return (
-    <Card sx={{ maxWidth: 600, maxHeight: 300, display: 'felx' }}>
+    <Card
+      sx={{
+        maxWidth: 600,
+        maxHeight: 300,
+        display: 'felx',
+        borderRadius: '10px',
+        mb: '2rem',
+      }}
+    >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
+            IO
           </Avatar>
         }
         action={
@@ -49,22 +64,36 @@ const PostCard: React.FC<Props> = ({ title, summary, author, date, image }) => {
           }}
           className="mx-2.5"
         />
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ marginX: '1.5rem', overflow: 'hidden' }}>
           <Typography
             variant="h4"
             color="text.secondary"
-            sx={{ marginX: '1.5rem' }}
             align="center"
+            sx={{ textOverflow: 'ellipsis' }}
           >
             {title}
           </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ textOverflow: 'ellipsis' }}
+          >
+            {summary}
+          </Typography>
         </Box>
       </Box>
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {summary}
-        </Typography>
-      </CardContent>
+      <hr />
+      <Box sx={{ display: 'flex', mt: '0.5rem' }}>
+        {tags.map((tag, idx) => (
+          <Chip
+            label={tag}
+            color="primary"
+            key={idx}
+            sx={{ m: '0.25rem' }}
+            clickable
+          />
+        ))}
+      </Box>
     </Card>
   );
 };

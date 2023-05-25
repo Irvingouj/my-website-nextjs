@@ -25,13 +25,13 @@ const Contacts: FC = () => (
       </div>
       <div className="flex justify-around align-middle min-w-[70vw] sm:min-w-[80%] my-[5vh] sm:mb-0">
         <a href={GetText.linkedin()} className="bg-[#f2f6fa] rounded-full">
-          <Image src="/16.png" alt="LinkedIn" width={40} height={40} />
+          <Image src="/linkendin.png" alt="LinkedIn" width={40} height={40} />
         </a>
         <a href={GetText.github()} className="bg-[#f2f6fa] rounded-full">
-          <Image src="/17.png" alt="GitHub" width={40} height={40} />
+          <Image src="/github.png" alt="GitHub" width={40} height={40} />
         </a>
         <a href={GetText.wechat()} className="bg-[#f2f6fa] rounded-full">
-          <Image src="/18.png" alt="WeChat" width={40} height={40} />
+          <Image src="/wechat.png" alt="WeChat" width={40} height={40} />
         </a>
       </div>
     </div>
