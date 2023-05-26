@@ -2,18 +2,16 @@ import PostCard from '@/components/Postcard/Postcard';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import Tags from '@/components/Tags/Tags';
 import { muitheme } from '@/styles/theme';
+import { fetchBlogs } from '@/utils/redux/blogSlice';
+import { useAppSelector, withStore } from '@/utils/redux/store';
 import { Avatar, CssBaseline, Stack, ThemeProvider } from '@mui/material';
+import { InferGetServerSidePropsType, NextPage } from 'next';
 import Image from 'next/image';
+import type { } from 'redux-thunk/extend-redux';
 
-const testPostProps = {
-  title: 'test title',
-  summary: 'test summary',
-  author: 'test author',
-  date: 'test date',
-  image: '/react-logo.png',
-};
+const BlogIndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
 
-export default function BlogIndexPage() {
+  const blogs = useAppSelector(state => state.blogs).blogs;
   return (
     <ThemeProvider theme={muitheme}>
       <CssBaseline />
@@ -47,14 +45,17 @@ export default function BlogIndexPage() {
           <div className="grid grid-cols-[2fr_1fr] mt-[5vh]">
             <div className="flex-grow-[2] flex justify-center align-middle">
               <Stack spacing={2} sx={{ minWidth: 600, mx: '2rem' }}>
-                <PostCard
-                  title={testPostProps.title}
-                  summary={testPostProps.summary}
-                  author={testPostProps.author}
-                  date={testPostProps.date}
-                  image={testPostProps.image}
-                  tags={['reacr', 'nextjs', 'mui']}
-                />
+                {blogs.map((blog, index) => (
+                  <PostCard
+                    key={index}
+                    title={blog.title}
+                    summary={blog.content}
+                    author={blog.author}
+                    date={blog.created_at}
+                    image="/react-logo.png" // Assuming you don't have an image URL in the blog data, so left blank
+                    tags={['reacr', 'nextjs', 'mui']} // Tags seem to be static, so left as is
+                  />
+                ))}
               </Stack>
             </div>
 
@@ -75,3 +76,23 @@ export default function BlogIndexPage() {
     </ThemeProvider>
   );
 }
+
+
+// export const getServerSideProps: GetServerSideProps<{
+//   blogListState: BlogListState
+// }> = async () => {
+
+//   return {
+//     props: {
+//       blogListState: {
+//         blogs: []
+//       }
+//     }
+//   }
+// };
+
+export const getServerSideProps = withStore(async (store) => {
+  await store.dispatch(fetchBlogs())
+})
+
+export default BlogIndexPage;

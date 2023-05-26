@@ -1,0 +1,48 @@
+import { AppThunk } from "@/utils/redux/store";
+import { supabase } from "@/utils/supabase";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+export type BlogSummary = {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  created_at: string;
+}
+
+export interface BlogListState {
+  blogs: BlogSummary[];
+}
+
+const initialState: BlogListState = {blogs:[]} as BlogListState;
+
+export const blogSlice = createSlice({
+  name: 'blog',
+  initialState,
+  reducers: {
+    setBlogs: (state, action: PayloadAction<BlogSummary[]>) => {
+      state.blogs = action.payload;
+    }
+  },
+});
+
+export const fetchBlogs = ():AppThunk => async (dispatch) => {
+  const {data, error} = await supabase.from('blogs').select(`*`)
+
+  if (error) {  
+    return;
+  }
+  if (!data) return;
+
+  const transformedData: BlogSummary[] = data.map(blog => ({
+    id: blog.id,
+    title: blog.title,
+    content: blog.content,
+    author: blog.author_id,
+    created_at: blog.published_date ? blog.published_date : ''
+  }));
+
+
+  dispatch(blogSlice.actions.setBlogs(transformedData));
+}
+  

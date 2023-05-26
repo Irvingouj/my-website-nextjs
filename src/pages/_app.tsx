@@ -2,19 +2,22 @@
 import Seo from '@/components/Seo';
 import '@/styles/colors.css';
 import '@/styles/globals.css';
+import { RootState, createStore } from '@/utils/redux/store';
 import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from 'next/app';
+import { Provider } from 'react-redux';
 
-/**
- * !STARTERCONF info
- * ? `Layout` component is called in every page using `np` snippets. If you have consistent layout across all page, you can add it here too
- */
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+
+function MyApp({ Component, pageProps }: AppProps<{ serverState: RootState }>) {
+  const store = createStore(pageProps);
   return (
     <>
       <Seo />
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
       <Analytics />
     </>
   );
