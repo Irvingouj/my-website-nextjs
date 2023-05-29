@@ -3,15 +3,23 @@ import SearchBar from '@/components/SearchBar/SearchBar';
 import Tags from '@/components/Tags/Tags';
 import { muitheme } from '@/styles/theme';
 import { fetchBlogs } from '@/utils/redux/blogSlice';
+import { fetchProfileName } from '@/utils/redux/profileSlice';
 import { useAppSelector, withStore } from '@/utils/redux/store';
 import { Avatar, CssBaseline, Stack, ThemeProvider } from '@mui/material';
+import {
+  Session,
+  User,
+  createPagesServerClient,
+} from '@supabase/auth-helpers-nextjs';
 import { InferGetServerSidePropsType, NextPage } from 'next';
 import Image from 'next/image';
-import type { } from 'redux-thunk/extend-redux';
 
-const BlogIndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = () => {
+const BlogIndexPage: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = () => {
+  const blogs = useAppSelector((state) => state.blogs).blogs;
+  const currentUserName = useAppSelector((state) => state.profile).name;
 
-  const blogs = useAppSelector(state => state.blogs).blogs;
   return (
     <ThemeProvider theme={muitheme}>
       <CssBaseline />
@@ -45,15 +53,16 @@ const BlogIndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSidePr
           <div className="grid grid-cols-[2fr_1fr] mt-[5vh]">
             <div className="flex-grow-[2] flex justify-center align-middle">
               <Stack spacing={2} sx={{ minWidth: 600, mx: '2rem' }}>
-                {blogs.map((blog, index) => (
+                {blogs.map((blog) => (
                   <PostCard
-                    key={index}
+                    key={blog.id}
+                    id={blog.id}
                     title={blog.title}
                     summary={blog.content}
-                    author={blog.author}
-                    date={blog.created_at}
+                    author={currentUserName}
+                    date={formatDate(blog.created_at)}
                     image="/react-logo.png" // Assuming you don't have an image URL in the blog data, so left blank
-                    tags={['reacr', 'nextjs', 'mui']} // Tags seem to be static, so left as is
+                    tags={['react', 'nextjs', 'mui']} // Tags seem to be static, so left as is
                   />
                 ))}
               </Stack>
@@ -75,24 +84,45 @@ const BlogIndexPage: NextPage<InferGetServerSidePropsType<typeof getServerSidePr
       </main>
     </ThemeProvider>
   );
+};
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const day = ('0' + date.getDate()).slice(-2);
+  return `${year}-${month}-${day}`;
 }
 
+export const getServerSideProps = withStore<{
+  initialSession: Session;
+  user: User;
+}>(async (store, ctx) => {
+  await store.dispatch(fetchBlogs());
+  // Create authenticated Supabase Client
+  const supabase = createPagesServerClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-// export const getServerSideProps: GetServerSideProps<{
-//   blogListState: BlogListState
-// }> = async () => {
+  if (!session)
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    };
 
-//   return {
-//     props: {
-//       blogListState: {
-//         blogs: []
-//       }
-//     }
-//   }
-// };
+  await store.dispatch(fetchProfileName(session.user));
 
-export const getServerSideProps = withStore(async (store) => {
-  await store.dispatch(fetchBlogs())
-})
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+});
 
 export default BlogIndexPage;

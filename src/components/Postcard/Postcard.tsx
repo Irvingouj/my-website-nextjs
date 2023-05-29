@@ -7,9 +7,11 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 interface Props {
+  id: number;
   title: string;
   summary: string;
   author: string;
@@ -19,6 +21,7 @@ interface Props {
 }
 
 const PostCard: React.FC<Props> = ({
+  id,
   title,
   summary,
   author,
@@ -26,6 +29,12 @@ const PostCard: React.FC<Props> = ({
   image,
   tags,
 }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/blog/${id}`);
+  };
+
   return (
     <Card
       sx={{
@@ -35,6 +44,7 @@ const PostCard: React.FC<Props> = ({
         borderRadius: '10px',
         mb: '2rem',
       }}
+      onClick={handleClick}
     >
       <CardHeader
         avatar={

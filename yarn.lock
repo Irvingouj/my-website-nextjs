@@ -1904,6 +1904,26 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@supabase/auth-helpers-nextjs@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-nextjs/-/auth-helpers-nextjs-0.7.0.tgz#72b7ff10e951115962e0d515cf4a93ea19a94787"
+  integrity sha512-FvQflNstWjBXEr0oBux1xqalrpZatCAmnWXROs5HJyCGP7hb+iSWqlwBQtyAllvw2baUufHkXyP+vr1PI3myKA==
+  dependencies:
+    "@supabase/auth-helpers-shared" "0.4.0"
+    set-cookie-parser "^2.6.0"
+
+"@supabase/auth-helpers-react@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-react/-/auth-helpers-react-0.4.0.tgz#49254e0dd15fde440e89478598cc296b3404d44a"
+  integrity sha512-EPsLi6r2NSZ4pyK9PTjImx9FFM+2rJoNN/I0kF3rqj2HGcFstopu9ZELKQ5Lc1humlCG4pxIdHn3564gJqIqlQ==
+
+"@supabase/auth-helpers-shared@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-shared/-/auth-helpers-shared-0.4.0.tgz#7e502d77a5b7707b13d852c782b2c10f0b44a329"
+  integrity sha512-5wlCGb4HZ46W2fg8tdi22ZU1GAIOe3YxXrTgvAjWVapNFN+PiH5cFIbz51ZgZRK1TokRZ01pB1GEFy4e+NZE+A==
+  dependencies:
+    jose "^4.14.3"
+
 "@supabase/functions-js@^2.1.0":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@supabase/functions-js/-/functions-js-2.1.1.tgz#31eb64734d59e6da84927e6f50f627ad5e03c519"
@@ -5345,6 +5365,11 @@ jiti@^1.18.2:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.18.2.tgz#80c3ef3d486ebf2450d9335122b32d121f2a83cd"
   integrity sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==
 
+jose@^4.14.3:
+  version "4.14.4"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-4.14.4.tgz#59e09204e2670c3164ee24cbfe7115c6f8bff9ca"
+  integrity sha512-j8GhLiKmUAh+dsFXlX1aJCbt5KMibuKb+d7j1JaOJG6s2UjX1PQlW+OKB/sD4a/5ZYF4RcmYmLSndOoU3Lt/3g==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -6695,6 +6720,11 @@ semver@^7.3.2, semver@^7.3.4, semver@^7.3.7:
   integrity sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==
   dependencies:
     lru-cache "^6.0.0"
+
+set-cookie-parser@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.6.0.tgz#131921e50f62ff1a66a461d7d62d7b21d5d15a51"
+  integrity sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==
 
 shebang-command@^2.0.0:
   version "2.0.0"
