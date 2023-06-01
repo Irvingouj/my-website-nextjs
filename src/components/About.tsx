@@ -25,7 +25,13 @@ const About: FC = () => (
         <p className="">Play a game with me!</p>
       </div>
       <div className="float-left w-[25vw] h-[25vw] relative hidden sm:block">
-        <Image src="/selfie.png" alt="Selfie" fill className="float-right" />
+        <Image
+          src="/selfie.png"
+          alt="Selfie"
+          fill
+          className="float-right"
+          loading="eager"
+        />
       </div>
       <div className="clear"></div>
     </div>

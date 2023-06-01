@@ -22,6 +22,7 @@ const LinksWrapper: FC = () => {
                   alt="Resume Icon"
                   fill
                   className="rounded-3xl object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+                  loading="eager"
                 />
                 <h3 className="absolute bottom-0 left-0 pb-2 pl-2 bg-heading-background w-full text-white bg-cover">
                   Resume
@@ -58,6 +59,7 @@ const LinksWrapper: FC = () => {
                     width={500}
                     height={500}
                     className="transition-transform duration-300 hover:scale-110 object-contain"
+                    loading="eager"
                   />
                 </div>
 
