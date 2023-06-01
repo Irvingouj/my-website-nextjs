@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import * as React from 'react';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   summary: string;
   author: string;
   date: string;
-  image: string;
+  image?: string;
   tags: string[];
 }
 
@@ -29,12 +29,6 @@ const PostCard: React.FC<Props> = ({
   image,
   tags,
 }) => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(`/blog/${id}`);
-  };
-
   return (
     <Card
       sx={{
@@ -44,7 +38,6 @@ const PostCard: React.FC<Props> = ({
         borderRadius: '10px',
         mb: '2rem',
       }}
-      onClick={handleClick}
     >
       <CardHeader
         avatar={
@@ -61,32 +54,35 @@ const PostCard: React.FC<Props> = ({
         subheader={date}
       />
       <Box sx={{ display: 'flex' }}>
-        <CardMedia
-          component="img"
-          image={image}
-          alt="Paella dish"
-          sx={{
-            maxHeight: 120,
-            maxWidth: 120,
-            minWidth: 120,
-            minHeight: 120,
-            objectFit: 'contain',
-          }}
-          className="mx-2.5"
-        />
+        {image && (
+          <CardMedia
+            component="img"
+            image={image}
+            alt="Paella dish"
+            sx={{
+              maxHeight: 120,
+              maxWidth: 120,
+              minWidth: 120,
+              minHeight: 120,
+              objectFit: 'contain',
+            }}
+            className="mx-2.5"
+          />
+        )}
         <Box sx={{ marginX: '1.5rem', overflow: 'hidden' }}>
           <Typography
-            variant="h4"
+            variant="h5"
             color="text.secondary"
-            align="center"
-            sx={{ textOverflow: 'ellipsis' }}
+            sx={{ textOverflow: 'ellipsis', fontWeight: 'bold' }}
           >
-            {title}
+            <Link href={`/blog/${id}`} className="hover:text-blue-400">
+              {title}
+            </Link>
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ textOverflow: 'ellipsis' }}
+            sx={{ textOverflow: 'ellipsis', minHeight: '5rem' }}
           >
             {summary}
           </Typography>

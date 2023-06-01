@@ -1,11 +1,18 @@
+import { Link, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 import ReactMarkdown from 'markdown-to-jsx';
 import React from 'react';
 
-function MarkdownListItem(props: React.ReactNode) {
-  return <Box component="li" sx={{ mt: 1, typography: 'body1' }} {...props} />;
+interface MarkdownListItemProps {
+  children: React.ReactNode;
+}
+
+function MarkdownListItem({ children }: MarkdownListItemProps) {
+  return (
+    <Box component="li" sx={{ mt: 1, typography: 'body1' }}>
+      {children}
+    </Box>
+  );
 }
 
 const options = {
@@ -45,6 +52,10 @@ const options = {
   },
 };
 
-export default function Markdown(props: React.ReactNode) {
-  return <ReactMarkdown options={options} {...props} />;
+interface MarkdownProps {
+  children: string;
+}
+
+export default function Markdown({ children }: MarkdownProps) {
+  return <ReactMarkdown options={options}>{children}</ReactMarkdown>;
 }

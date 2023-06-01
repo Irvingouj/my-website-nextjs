@@ -3,7 +3,9 @@ import Seo from '@/components/Seo';
 import { Database } from '@/lib/database.types';
 import '@/styles/colors.css';
 import '@/styles/globals.css';
+import { muitheme } from '@/styles/theme';
 import { RootState, createStore } from '@/utils/redux/store';
+import { ThemeProvider } from '@mui/material';
 import {
   Session,
   createPagesBrowserClient,
@@ -32,7 +34,9 @@ function MyApp({
         initialSession={pageProps.initialSession}
       >
         <Provider store={store}>
-          <Component {...pageProps} />
+          <ThemeProvider theme={muitheme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
         </Provider>
       </SessionContextProvider>
     </>

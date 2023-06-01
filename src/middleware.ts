@@ -25,5 +25,6 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: '/blog/:path*',
+  // don't do anything for now
+  // matcher: '/blog/:path*',
 };
