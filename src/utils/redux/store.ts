@@ -1,6 +1,7 @@
 import logger from '@/lib/logger';
 import { blogSlice } from '@/utils/redux/blogSlice';
 import { profileSlice } from '@/utils/redux/profileSlice';
+import { tagsSlice } from '@/utils/redux/tagsSlice';
 import {
   Action,
   Store,
@@ -21,6 +22,7 @@ import type {} from 'redux-thunk/extend-redux';
 const reducers = combineReducers({
   blogs: blogSlice.reducer,
   profile: profileSlice.reducer,
+  tags: tagsSlice.reducer,
 });
 
 const serverStore = configureStore({

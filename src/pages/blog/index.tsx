@@ -4,6 +4,7 @@ import Tags from '@/components/Tags/Tags';
 import { fetchBlogs } from '@/utils/redux/blogSlice';
 import { fetchProfileName } from '@/utils/redux/profileSlice';
 import { useAppSelector, withStore } from '@/utils/redux/store';
+import { fetchTags } from '@/utils/redux/tagsSlice';
 import { Avatar, CssBaseline, Stack } from '@mui/material';
 import {
   Session,
@@ -12,12 +13,29 @@ import {
 } from '@supabase/auth-helpers-nextjs';
 import { InferGetServerSidePropsType, NextPage } from 'next';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const BlogIndexPage: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {
+  const selectedTags = useAppSelector((state) => state.tags).filter(
+    (t) => t.selected,
+  );
   const blogs = useAppSelector((state) => state.blogs).blogs;
   const currentUserName = useAppSelector((state) => state.profile).name;
+  const [searchInput, setSearchInput] = useState('');
+
+  const filteredBlogs = blogs
+    .filter((currBlog) => {
+      // return the blog if a tag of currBlog is in selectedTags
+      return currBlog.tags.some((t) =>
+        selectedTags.some((st) => st.id === t.id),
+      );
+    })
+    .filter((currBlog) => {
+      // return the blog if the searchInput is empty or the blog title contains the searchInput
+      return currBlog.title.toLowerCase().includes(searchInput.toLowerCase());
+    });
 
   return (
     <main className="bg-main-background bg-cover h-[100vh]">
@@ -51,7 +69,7 @@ const BlogIndexPage: NextPage<
         <div className="grid grid-cols-[2fr_1fr] mt-[5vh]">
           <div className="flex-grow-[2] flex justify-center align-middle">
             <Stack spacing={2} sx={{ minWidth: 600, mx: '2rem' }}>
-              {blogs.map((blog) => (
+              {filteredBlogs.map((blog) => (
                 <PostCard
                   key={blog.id}
                   id={blog.id}
@@ -60,14 +78,17 @@ const BlogIndexPage: NextPage<
                   author={currentUserName}
                   date={formatDate(blog.created_at)}
                   // image="/react-logo.png" // Assuming you don't have an image URL in the blog data, so left blank
-                  tags={['react', 'nextjs', 'mui']} // Tags seem to be static, so left as is
+                  tags={blog.tags.map((t) => t.name)} // Tags seem to be static, so left as is
                 />
               ))}
             </Stack>
           </div>
 
           <div className="flex-grow">
-            <SearchBar />
+            <SearchBar
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+            />
             <div className="relative py-4 my-[10px]">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-b border-gray-300"></div>
@@ -93,10 +114,13 @@ export function formatDate(dateString: string): string {
 }
 
 export const getServerSideProps = withStore<{
-  initialSession: Session;
-  user: User;
+  initialSession: Session | null;
+  user: User | null;
 }>(async (store, ctx) => {
-  await store.dispatch(fetchBlogs());
+  const fetchBlogPromise = store.dispatch(fetchBlogs());
+  const fetchTagPromise = store.dispatch(fetchTags());
+  await Promise.all([fetchBlogPromise, fetchTagPromise]);
+
   // Create authenticated Supabase Client
   const supabase = createPagesServerClient(ctx);
   // Check if we have a session
@@ -104,13 +128,14 @@ export const getServerSideProps = withStore<{
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session)
+  if (!session) {
     return {
-      redirect: {
-        destination: '/auth',
-        permanent: false,
+      props: {
+        initialSession: null,
+        user: null,
       },
     };
+  }
 
   await store.dispatch(fetchProfileName(session.user));
 

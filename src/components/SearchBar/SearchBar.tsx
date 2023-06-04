@@ -3,7 +3,13 @@ import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 
-const SearchBar = () => {
+const SearchBar = ({
+  searchInput,
+  setSearchInput,
+}: {
+  searchInput: string;
+  setSearchInput: (s: string) => void;
+}) => {
   return (
     <Paper
       component="form"
@@ -20,6 +26,8 @@ const SearchBar = () => {
         placeholder="Search Blog"
         inputProps={{ 'aria-label': 'search slog' }}
         className="focus:outline-none"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
       />
       <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
         <SearchIcon />
