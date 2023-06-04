@@ -1,3 +1,4 @@
+import FileUploadDialog from '@/components/FileUploadDialog/FileUploadDialog';
 import PostCard from '@/components/Postcard/Postcard';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import Tags from '@/components/Tags/Tags';
@@ -5,7 +6,8 @@ import { fetchBlogs } from '@/utils/redux/blogSlice';
 import { fetchProfileName } from '@/utils/redux/profileSlice';
 import { useAppSelector, withStore } from '@/utils/redux/store';
 import { fetchTags } from '@/utils/redux/tagsSlice';
-import { Avatar, CssBaseline, Stack } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Avatar, CssBaseline, IconButton, Stack } from '@mui/material';
 import {
   Session,
   User,
@@ -24,6 +26,7 @@ const BlogIndexPage: NextPage<
   const blogs = useAppSelector((state) => state.blogs).blogs;
   const currentUserName = useAppSelector((state) => state.profile).name;
   const [searchInput, setSearchInput] = useState('');
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const filteredBlogs = blogs
     .filter((currBlog) => {
@@ -40,6 +43,12 @@ const BlogIndexPage: NextPage<
   return (
     <main className="bg-main-background bg-cover h-[100vh]">
       <CssBaseline />
+      <FileUploadDialog
+        open={dialogOpen}
+        handleClose={() => {
+          setDialogOpen(false);
+        }}
+      />
       <div className="sticky min-h-[75px] bg-white flex justify-between">
         <div className="flex flex-row justify-start relative flex-1 max-h-[60px] mt-[5px] max-w-[300px]">
           <Image src="/irving-ou.svg" alt="logo" fill className="" />
@@ -85,10 +94,31 @@ const BlogIndexPage: NextPage<
           </div>
 
           <div className="flex-grow">
-            <SearchBar
-              searchInput={searchInput}
-              setSearchInput={setSearchInput}
-            />
+            <div className="flex items-center">
+              <SearchBar
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
+              <div className="flex justify-center items-center h-full">
+                <IconButton
+                  aria-label="add"
+                  color="primary"
+                  size="large"
+                  onClick={() => {
+                    setDialogOpen(true);
+                  }}
+                  sx={{
+                    transition: 'all 0.2s ease-in-out',
+                    ':focus': {
+                      transform: 'rotate(-180deg)',
+                    },
+                  }}
+                >
+                  <AddCircleOutlineIcon fontSize="large" />
+                </IconButton>
+              </div>
+            </div>
+
             <div className="relative py-4 my-[10px]">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-b border-gray-300"></div>
